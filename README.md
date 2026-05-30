@@ -2,7 +2,7 @@
 
 Personal opencode setup for `tonfield`.
 
-This repository is intended to restore the opencode configuration on another Mac. It includes agents, commands, instructions, plugins, templates, helper tools, and core config files.
+This repository is intended to restore the opencode configuration on another Mac, Linux, or other Unix-like machine. It includes agents, commands, instructions, plugins, templates, helper tools, and core config files.
 
 ## Included
 
@@ -29,9 +29,17 @@ The repo intentionally excludes generated or machine-local files such as:
 
 API keys and auth state are expected to live outside the repo in environment variables, opencode auth storage, macOS Keychain, or local service config.
 
-## Restore on another Mac
+## Restore on macOS or Linux
 
-Install opencode first. If `~/.config/opencode` already exists on the target machine, back it up before cloning:
+Install prerequisites first:
+
+- opencode
+- git
+- Node/npm
+- Python 3
+- `uv`/`uvx`, if using MCP tools that call it
+
+If `~/.config/opencode` already exists on the target machine, back it up before cloning:
 
 ```sh
 mkdir -p ~/.config
@@ -54,11 +62,29 @@ Then restore required credentials/env vars as needed:
 - `CONTEXT7_API_KEY`
 - `BRAVE_API_KEY`
 - `EXA_API_KEY`
-- `MORPH_API_KEY` in macOS Keychain, if using Morph tools
+- `MORPH_API_KEY`, if using Morph tools
 
-The helper script `opencode-auth-env.sh` can export provider keys from opencode's local auth store and Morph from macOS Keychain when sourced from your shell startup file.
+The helper script `opencode-auth-env.sh` can export provider keys from opencode's local auth store, oMLX local settings, and Morph from macOS Keychain when sourced from your shell startup file. Existing environment variables take precedence, so Linux machines can just export keys through the shell or secret manager.
+
+### Machine-local notes
+
+- macOS can keep `MORPH_API_KEY` in Keychain under service `morphllm-api-key` and account `$USER`.
+- Linux should provide keys with environment variables or opencode's local auth store.
+- Pushover notifications are optional. The helper checks `PUSHOVER_NOTIFY`, then `pushover-notify` in `PATH`, then `$HOME/bin/pushover-notify`, then the original `/Users/ton/bin/pushover-notify` path. If none exists, it exits successfully without breaking opencode.
+- Local model providers such as `127.0.0.1:10000` or `127.0.0.1:8000` require equivalent local services on each machine.
 
 Finally, restart opencode so it reloads the restored config.
+
+## Syncing between machines
+
+Before editing config on a machine, pull the latest backup first:
+
+```sh
+cd ~/.config/opencode
+git pull --ff-only
+```
+
+After changing config, commit and push from that machine. On other machines, run `git pull --ff-only` to receive the same tracked setup. If `package.json`, `package-lock.json`, or `bun.lock` changed, run `npm install` after pulling.
 
 ## Updating the backup
 

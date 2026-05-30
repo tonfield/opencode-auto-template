@@ -5,8 +5,14 @@
   "showSessionTitle": false,
   "command": {
     "enabled": true,
-    "path": "/Users/ton/.config/opencode/tools/opencode-pushover.sh",
-    "args": ["{event}", "{message}", "{projectName}"],
+    "path": "/bin/sh",
+    "args": [
+      "-c",
+      "exec \"${OPENCODE_GLOBAL_DIR:-$HOME/.config/opencode}/tools/opencode-pushover.sh\" \"$0\" \"$1\" \"$2\"",
+      "{event}",
+      "{message}",
+      "{projectName}"
+    ],
     "minDuration": 0
   },
   "events": {

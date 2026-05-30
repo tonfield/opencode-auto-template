@@ -6,7 +6,16 @@
 # The env mappings are loaded from custom-providers.json in the installed
 # OpenCode config directory.
 
+opencode_has_python3() {
+  command -v python3 >/dev/null 2>&1
+}
+
 opencode_auth_api_key() {
+  if ! opencode_has_python3; then
+    printf '\n'
+    return 0
+  fi
+
   python3 - "$1" <<'PY'
 import json
 import sys
@@ -42,6 +51,10 @@ opencode_export_registered_auth_envs() {
     return 0
   fi
 
+  if ! opencode_has_python3; then
+    return 0
+  fi
+
   while IFS=$'\t' read -r env_name provider_id; do
     if [[ -n "$env_name" ]] && [[ -n "$provider_id" ]]; then
       opencode_export_auth_env "$env_name" "$provider_id"
@@ -68,6 +81,11 @@ PY
 }
 
 opencode_omlx_api_key() {
+  if ! opencode_has_python3; then
+    printf '\n'
+    return 0
+  fi
+
   python3 <<'PY'
 import json
 from pathlib import Path
@@ -95,14 +113,32 @@ opencode_export_omlx_env() {
   fi
 }
 
+opencode_export_morph_env() {
+  local current_value=""
+  local key=""
+
+  current_value="$(printenv MORPH_API_KEY 2>/dev/null || true)"
+  if [[ -n "$current_value" ]]; then
+    return 0
+  fi
+
+  if ! command -v security >/dev/null 2>&1; then
+    return 0
+  fi
+
+  key="$(security find-generic-password -a "$USER" -s "morphllm-api-key" -w 2>/dev/null || true)"
+  if [[ -n "$key" ]]; then
+    export MORPH_API_KEY="$key"
+  fi
+}
+
 opencode_export_registered_auth_envs
 opencode_export_omlx_env
+opencode_export_morph_env
 
 # Morph Fast Apply / WarpGrep
-# API key is stored in macOS Keychain item: service=morphllm-api-key, account=$USER.
-if command -v security >/dev/null 2>&1; then
-  export MORPH_API_KEY="$(security find-generic-password -a "$USER" -s "morphllm-api-key" -w 2>/dev/null)"
-fi
+# On macOS, the API key can be stored in Keychain item:
+# service=morphllm-api-key, account=$USER. Existing MORPH_API_KEY env vars win.
 export MORPH_EDIT=true
 export MORPH_WARPGREP=true
 export MORPH_WARPGREP_GITHUB=true
