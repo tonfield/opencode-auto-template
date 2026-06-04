@@ -204,7 +204,16 @@
     "opencode-agent-memory@latest",
     "opencode-mem@latest",
     "opencode-background-agents@latest",
-    "opencode-snip@latest"
+    "opencode-snip@latest",
+    [
+      "file:///Users/ton/projects/opencode-session-overview/dist/server.js",
+      {
+        "inject": true,
+        "compactionContext": true,
+        "maxSnapshotTokens": 1200,
+        "maxCompactionTokens": 900
+      }
+    ]
   ],
 
   "agent": {
