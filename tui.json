@@ -1,13 +1,4 @@
 {
   "$schema": "https://opencode.ai/tui.json",
-  "plugin": [
-    [
-      "file:///Users/ton/projects/opencode-session-overview/dist/tui.js",
-      {
-        "sidebar": true,
-        "sidebarOrder": 250,
-        "pollMs": 1500
-      }
-    ]
-  ]
+  "plugin": []
 }
