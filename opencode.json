@@ -208,6 +208,12 @@
     },
     "auto": {
       "mode": "primary"
+    },
+    "plan": {
+      "disable": true
+    },
+    "build": {
+      "disable": true
     }
   }
 }
