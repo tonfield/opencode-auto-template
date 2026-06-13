@@ -103,10 +103,12 @@ When you spot an unrelated bug: don't fix it. Record it in `## Follow-ups` and m
 Use project files — not plugins — for persistent knowledge across sessions. This keeps the system prompt stable for caching.
 
 - **`docs/gotchas.md`** — record recurring pitfalls, invariants, fix patterns, and lessons learned. One entry per gotcha with: symptom, why it happens, what to check, safe practice.
+- **`docs/decisions.md`** — project-level architectural and process decisions. Append-only. Each decision gets a DEC-XXXX ID, date, status, context, decision, and consequences.
 - **Feature `## Research`** — findings tagged `[verified]`/`[assumed]` with their source. These survive in the feature file.
-- **Feature `## Decisions`** — date-stamped decisions with rationale. Referenced by later features.
+- **Feature `## Decisions`** — feature-specific decisions with rationale. For project-wide decisions, write to `docs/decisions.md` instead.
 - On session start: read `docs/gotchas.md` to pick up known patterns.
 - After discovering something reusable: write it to `docs/gotchas.md`. Don't duplicate what the repo or feature files already record.
+- When making a project-level decision that outlives the feature: write it to `docs/decisions.md`.
 
 ---
 
@@ -114,6 +116,7 @@ Use project files — not plugins — for persistent knowledge across sessions. 
 
 - `features/[slug].md` — durable feature record
 - `docs/gotchas.md` — persistent project knowledge: pitfalls, invariants, patterns discovered during work
+- `docs/decisions.md` — project-level decision log (separate from feature `## Decisions`)
 - TodoWrite — live checklist from `## Progress`
 - Current conversation, working tree, touched files, verification results
 
