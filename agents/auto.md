@@ -2,7 +2,7 @@
 description: Primary agent for the feature development system with Fable5 verification protocol.
 mode: primary
 temperature: 0.1
-color: "#8b5cf6"
+color: "#3b82f6"
 permission:
   task:
     "*": deny
