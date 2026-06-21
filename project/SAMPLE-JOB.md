@@ -71,13 +71,14 @@ Evidence: `uv run pytest` → all pass, `uv run python -m backtester.grid --demo
 - [x] Adversarial review clean (delegated to adversarial-reviewer)
 - [x] Goal-evaluator verdict recorded: FULFILLED for active phase
 
-### Phase 5: Close — pass: public docs updated before Phase 4 review or Phase 4 reopened after late public-surface changes + final job_goal verdict `FULFILLED` when `## Goal` exists (or `BLOCKED` with explicit blocked disclosure) + disclosure written
+### Phase 5: Close — pass: public docs updated before Phase 4 review or Phase 4 reopened after late public-surface changes + final job_goal verdict `FULFILLED` when `## Goal` exists (or `BLOCKED` with explicit blocked disclosure) + disclosure written + job archived + any reusable lesson consolidated with bidirectional provenance checked
 - status: passed
 - [x] Docs updated before Phase 4 review
 - [x] Final `job_goal` verdict recorded: FULFILLED
 - [x] Disclosure written to `## Closeout`
 - [x] Job archived to `jobs/archive/`
 - [x] Lesson consolidated to `memory/` if this job yielded one (none — routine implementation)
+- [x] Provenance chain resolves both directions (none — no reusable lesson consolidated)
 
 ## Subagent Receipts
 | ID | Agent | Status | Scope covered | Evidence | Changed paths | Parent decision | Verification |

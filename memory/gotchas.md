@@ -54,7 +54,7 @@ Recurring pitfalls, invariants, and change-impact warnings for this config repo.
 ## Traceability links break when the linked file moves after the link is written
 - Symptom: A provenance or cross-reference link is written to a job's current path, then the job is moved during closeout, leaving the link stale before anyone reads it.
 - Why it happens: The link is created from the file's current lifecycle state instead of its stable final state. For closeout provenance, `jobs/<slug>.md` is temporary once archive-on-closeout exists; `jobs/archive/<slug>.md` is the durable target.
-- What to check: Any time a job writes a `Consolidated to:` or `Source:` line, check whether either endpoint will be moved later in the same closeout flow. If yes, verify the link points at the final path, not the pre-move path.
-- Safe practice: Archive first, then consolidate. If the link must be computed before the move, compute it from the stable final destination. Treat write-then-move ordering as a stale-link risk even when it reads naturally in prose.
-- Source: `jobs/archive/foundations.md`
+- What to check: Any time a job writes a `Consolidated to:` or `Source:` line, check whether either endpoint will be moved later in the same closeout flow. If yes, verify the link points at the final path, not the pre-move path. Treat `jobs/archive/<slug>.md` as the stable identity.
+- Safe practice: Archive first, then consolidate. If the link must be computed before the move, compute it from the stable final destination. Before closeout is done, verify both directions resolve: memory `Source:` → archived job, and job `Consolidated to:` → memory target. Do not rename archived jobs unless updating every provenance link.
+- Source: `jobs/archive/foundations.md`; provenance-check refinement: `jobs/archive/provenance-closeout-check.md`
 - Related: `agents/auto.md` Step 8, `memory/decisions.md#dec-0008`, `jobs/archive/foundations.md`

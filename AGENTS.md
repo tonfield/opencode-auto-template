@@ -62,7 +62,7 @@ See `templates/job-template.md` for the canonical structure: Summary, optional G
 1. Create: Auto's Decompose step (Step 0) creates a populated job file for complex requests. Manual fallback: `/job <slug>` creates a blank template.
 2. Work: Auto orchestrates the cycle (see `agents/auto.md`) for each phase, delegating safe lanes, collecting receipts, verifying outputs, and advancing the Progress checklist.
 3. Review: `/review` checks changes, upserts actionable findings to `## Issues` by match key.
-4. Close: When Progress is fully checked and any `## Goal` is fulfilled or explicitly blocked, Auto writes the disclosure into `## Closeout`, moves the job to `jobs/archive/`, and consolidates any reusable lesson to `memory/`.
+4. Close: When Progress is fully checked and any `## Goal` is fulfilled or explicitly blocked, Auto writes the disclosure into `## Closeout`, moves the job to `jobs/archive/`, and consolidates any reusable lesson to `memory/` with provenance checked.
 
 ---
 

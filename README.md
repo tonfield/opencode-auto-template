@@ -206,7 +206,7 @@ A job is the unit of work; tasks track its steps. One lightweight file per job a
 | **Scope discipline** | Don't add scope beyond the task. |
 | **Act, don't over-deliberate** | Don't re-derive or re-litigate. |
 | **Parallel subagents** | Delegate read-only lanes (`repo-search`, `docs-research`, `impact-mapper`, `test-strategist`) in parallel while you keep working. Background delegation is read-only. Use foreground write-capable invocation for `patch-implementer`, and serialize write lanes unless paths/contracts are provably disjoint and recorded. |
-| **File-based knowledge** | Read `memory/gotchas.md` on start. Consolidate confirmed recurring patterns there at closeout; move completed jobs to `jobs/archive/`. No dynamic prompt injection. |
+| **File-based knowledge** | Read `memory/gotchas.md` on start. Consolidate confirmed recurring patterns there at closeout with provenance checked; move completed jobs to `jobs/archive/`. No dynamic prompt injection. |
 | **Never end on a promise** | Issue the tool call, not a plan. |
 
 ---

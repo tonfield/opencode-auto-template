@@ -146,7 +146,7 @@ If the request is complex — multiple steps, large scope, unknowns, or will spa
 ```
 - Job `## Progress` fully checked? If the job has a `## Goal`, run and record a final `job_goal` verdict first — `FULFILLED` allows closeout, `NOT FULFILLED` reopens the relevant phase, and `BLOCKED` may close only with an explicit blocked disclosure. Then write the disclosure into `## Closeout`.
 - **Archive the completed job.** Move the job file to `jobs/archive/` — `ls jobs/` shows active work, `ls jobs/archive/` shows closed.
-- **Consolidate the lesson (learning loop).** Ask whether this job yielded a reusable lesson — a decision, or a recurring pitfall (only when delegation or self-review confirmed a systematic weakness that will recur). If yes, write it to `memory/gotchas.md` (symptom/why/check/practice) or `memory/decisions.md` (DEC-XXXX) with provenance `Source: jobs/archive/<slug>.md`, and add a `Consolidated to:` line in Closeout linking back. This transfers episodic experience into semantic knowledge. Skip for one-off findings.
+- **Consolidate the lesson (learning loop).** Ask whether this job yielded a reusable lesson — a decision, or a recurring pitfall (only when delegation or self-review confirmed a systematic weakness that will recur). If yes, write it to `memory/gotchas.md` (symptom/why/check/practice) or `memory/decisions.md` (DEC-XXXX) with `Source: jobs/archive/<slug>.md`, and add `Consolidated to: memory/...` in Closeout. Treat the archived slug as the stable identity; do not rename archived jobs unless updating every provenance link. Before done, verify both directions resolve: memory `Source:` → archived job, and job `Consolidated to:` → memory target. This transfers episodic experience into semantic knowledge. Skip for one-off findings.
 - Self-audit before sending: Are [verified] and [assumed] clearly separated? Comparison to baseline shown? Anything unrequested changed? Destructive action without rollback? Subagent output accepted without re-verifying? Impact checked? Fix what fails.
 - Last paragraph a plan, list of next steps, or "I'll now…"? You haven't acted — issue the tool call. Never end on a promise.
 
@@ -158,7 +158,7 @@ When a job file is active, these rules govern how the 8 steps interact with the 
 
 - **Active phase.** The first phase with status `pending`/`reopened` or an unchecked item is active. Work only that phase's items until its `pass:` condition is met. When every item passes, set the phase status to `passed` — the next becomes active. For simple jobs, collapse to one phase.
 - **Within a phase.** Run the 8-step cycle around each coherent unit, not necessarily every checkbox. In Build (Phase 3), each slice gets its own verify + review (steps 4-5) — the loop is tighter. In Verify (Phase 4), one full run across all completed work. In Research / Design, the cycle runs around fact-finding and decision-making — same steps, different output.
-- **Job complete.** All phases pass and any `## Goal` has a final `job_goal` verdict of `FULFILLED` (or `BLOCKED` with explicit blocked disclosure) → write `## Closeout` → archive to `jobs/archive/` → consolidate any lesson to `memory/` → job done. `NOT FULFILLED` reopens the relevant phase.
+- **Job complete.** All phases pass and any `## Goal` has a final `job_goal` verdict of `FULFILLED` (or `BLOCKED` with explicit blocked disclosure) → write `## Closeout` → archive to `jobs/archive/` → consolidate any lesson to `memory/` with provenance checked → job done. `NOT FULFILLED` reopens the relevant phase.
 - **Switching jobs.** Read the new file, replace TodoWrite, continue. No ceremony.
 - **Unrelated bugs.** Record in `## Follow-ups`, move on. Unrequested fixes are the main way you break things.
 
@@ -189,7 +189,7 @@ Use project files — not plugins — for persistent knowledge across sessions. 
 
 - **`memory/gotchas.md`** — recurring pitfalls, invariants, fix patterns. Read on session start. In Close, append a concise entry only when delegation or self-review revealed a confirmed systematic weakness that will recur if not recorded.
 - **`memory/decisions.md`** — project-level architectural decisions (DEC-XXXX IDs; edit in place when refined, commit each change). Use for decisions that outlive a single job.
-- **`jobs/[slug].md`** — the durable job record. Holds Research, Receipts, optional Delegation Plan/Subagent Receipts, phase-grouped Progress, Decisions, and Closeout. Completed jobs move to `jobs/archive/`.
+- **`jobs/[slug].md`** — the durable job record. Holds Research, Receipts, optional Delegation Plan/Subagent Receipts, phase-grouped Progress, Decisions, and Closeout. Completed jobs move to `jobs/archive/`; the archived slug is the stable provenance identity.
 - **`templates/job-template.md`** — the canonical template for new job files.
 - **TodoWrite** — live checklist from `## Progress`. Replace when switching jobs.
 

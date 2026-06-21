@@ -83,13 +83,14 @@ Run cycle steps 4-7 across the completed work: re-run full gate (report delta), 
 ### Phase 5: Close
 Write the disclosure to `## Closeout`. Public docs/protocol/config updates should already be included before Phase 4 review; if Close discovers or makes late public-surface changes, reopen Phase 4 and rerun reviewer/adversarial/goal gates before Closeout. If `## Goal` exists, run and record a final `job_goal` verdict before Closeout. Report completion.
 
-- pass: public docs updated before Phase 4 review or Phase 4 reopened after late public-surface changes + final job_goal verdict `FULFILLED` when `## Goal` exists (or `BLOCKED` with explicit blocked disclosure) + Closeout written
+- pass: public docs updated before Phase 4 review or Phase 4 reopened after late public-surface changes + final job_goal verdict `FULFILLED` when `## Goal` exists (or `BLOCKED` with explicit blocked disclosure) + Closeout written + job archived + any reusable lesson consolidated with bidirectional provenance checked
 - status: pending | passed | reopened
 - [ ] Docs updated before Phase 4 review, or Phase 4 reopened after late public-surface changes
 - [ ] Final `job_goal` verdict is `FULFILLED`, if `## Goal` exists (or `BLOCKED` with explicit blocked disclosure)
 - [ ] Disclosure written to `## Closeout`
 - [ ] Job archived to `jobs/archive/`
 - [ ] Lesson consolidated to `memory/` if this job yielded one (`Consolidated to:` line in Closeout)
+- [ ] If a lesson was consolidated, provenance chain resolves both directions (`Source: jobs/archive/<slug>.md` in memory + `Consolidated to: memory/...` in Closeout, and both targets exist); otherwise record none
 
 ## Subagent Receipts (optional — accepted non-trivial delegation results)
 Only record results Auto accepted after checking scope and evidence. A subagent's status is not proof until Auto verifies the relevant gate.
@@ -113,4 +114,4 @@ Only record results Auto accepted after checking scope and evidence. A subagent'
 - **Goal:** FULFILLED | BLOCKED — <one-line final `job_goal` evidence; `NOT FULFILLED` reopens the relevant phase and is not valid for Closeout>
 - **Couldn't verify:** what's unknowable from here — includes deliberately-skipped checks and why, plus what a cheap proxy did not cover
 - **Most likely wrong:** what you'd bet against if forced
-- **Consolidated to:** [memory/gotchas.md#N or memory/decisions.md#DEC-XXXX — only if this job yielded a reusable lesson; omit otherwise]
+- **Consolidated to:** [memory/gotchas.md#N or memory/decisions.md#DEC-XXXX — only if this job yielded a reusable lesson and the bidirectional provenance check passed; omit otherwise]
