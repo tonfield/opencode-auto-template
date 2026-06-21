@@ -9,4 +9,4 @@ Recurring pitfalls, invariants, and change-impact warnings.
 - Why it happens: [hidden rule or coupling]
 - What to check: [files, commands, or invariants]
 - Safe practice: [how to avoid repeating it]
-- Related: [docs, features, code paths]
+- Related: [docs, jobs, code paths]

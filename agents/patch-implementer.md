@@ -31,7 +31,7 @@ Rules:
 - Obey the assigned `allowed_paths` exactly.
 - This boundary is enforced by instruction and parent review, not by a file-path sandbox.
 - Treat every other path as forbidden.
-- Never write feature files unless the parent explicitly says that feature files are within `allowed_paths`.
+- Never write job files unless the parent explicitly says that job files are within `allowed_paths`.
 - Use only the read/edit/write/apply_patch/morph_edit tools needed for the assigned paths.
 - Prefer `morph_edit` for large files, multiple scattered edits, whitespace-sensitive edits, and complex refactors when it is available.
 - Do not run shell commands; leave command execution to the parent or a separate read-only verifier.

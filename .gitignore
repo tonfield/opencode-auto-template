@@ -6,11 +6,12 @@ node_modules/
 .DS_Store
 opencode-notifier-state.json
 
-# BEGIN opencode feature surfaces
-# Root feature files are local state for this config repo — not tracked here.
-# Downstream project repos initialized from project/ may track feature markdown;
+# BEGIN opencode job surfaces
+# Root job files (active + archive) are local episodic state — not tracked here.
+# Root-anchored (/jobs/) so project/jobs/ (the template model) stays trackable.
+# Downstream project repos initialized from project/ may track job markdown;
 # the init command recommends adding exceptions there:
-#   !features/
-#   !features/*.md
-features/
-# END opencode feature surfaces
+#   !jobs/
+#   !jobs/*.md
+/jobs/
+# END opencode job surfaces

@@ -29,9 +29,9 @@ Tag load-bearing claims `[verified]` or `[assumed]`. An unlabeled claim is a def
 
 Scope:
 - Search only the current local repo/worktree unless the parent explicitly assigns another local path.
-- Map what still speaks the old contract: callers, caches, persisted state, docs, configs, generated files, commands, tests, templates, and dependent features.
+- Map what still speaks the old contract: callers, caches, persisted state, docs, configs, generated files, commands, tests, templates, and dependent jobs.
 - Identify safe parallel lanes: read-only lanes, disjoint write paths, serialized shared surfaces, and dependency ordering.
-- Do not write files, update feature records, run shell commands, or fetch external sources unless the parent explicitly supplies the evidence.
+- Do not write files, update job records, run shell commands, or fetch external sources unless the parent explicitly supplies the evidence.
 
 Process:
 1. Restate the proposed change and boundaries.
