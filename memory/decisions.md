@@ -66,3 +66,35 @@ Accepted project-level decisions. Reflect current truth — edit in place when a
 - Consequences: The worldview is explanatory (README), the behaviors are operational (auto.md) — this split is deliberate and consistent with the cognitive architecture. The learning loop makes the episodic→semantic transfer a defined step at closeout rather than ad-hoc; the provenance link makes it auditable because the closeout checklist verifies both directions resolve (`Source:` from memory to archived job, `Consolidated to:` from job to memory). The archive-move gives filesystem-level job status without an index file (drift-proof). The archived slug is the identity; a separate Job-ID remains unnecessary unless archived jobs must be renamed or referenced across repos. Attribution accuracy is practiced as well as preached — 3 of the 5 corrections appear in the roots table (Shewhart, Mitchell, Lindy); CUDOS appears in the attributions note; Baddeley's episodic buffer is context for the memory-architecture attribution, recorded here. The worldview is model-independent (documentation, not a prompt behavior); the two operational behaviors are reliable across models (explicit closeout steps, not disposition-dependent). The gap-analysis additions (Fallibilism root, antifragility→learning loop, satisficing→simplicity context, extended mind→file memory, Gall/Lindy→simplicity grounding, shoshin→beginner's mind) are folded into the roots table as context, not bolt-on lenses — per the user's "merge everything together as one."
 - Source: `jobs/archive/foundations.md`; provenance-check refinement: `jobs/archive/provenance-closeout-check.md`
 - Related: `README.md`, `agents/auto.md`, DEC-0006, DEC-0007
+
+## DEC-0009 — Build inline by default; delegate for independence and breadth
+- Date: 2026-07-02
+- Status: accepted (refines DEC-0005)
+- Context: DEC-0005 made Auto orchestration-first, including delegated implementation via `patch-implementer`. A cross-harness design pass (porting this protocol to Claude Code as `claude-auto`) surfaced the economics: subagents start cold and re-derive context the parent already holds, while the real value of delegation is (a) fresh-context gates that cannot inherit the author's blind spots and (b) parallel read-only breadth.
+- Decision: Auto builds inline by default. Delegation is mandatory for the independence gates (reviewer, adversarial-reviewer, goal-evaluator) and default for read-only breadth (repo-search, docs-research, impact-mapper, test-strategist). A `patch-implementer` write lane is the exception for truly independent bounded edits, not the default posture.
+- Consequences: Fewer cold-start round-trips on routine work; gates keep their full force. Auto remains the orchestrator and state owner per DEC-0005 — only the default posture for implementation labor changes.
+- Related: `agents/auto.md`, `AGENTS.md`, DEC-0005
+
+## DEC-0010 — Goal-evaluator gets scoped read access
+- Date: 2026-07-02
+- Status: accepted
+- Context: The goal-evaluator was pure-model (all tools denied). A prior closeout recorded the cost: if the parent's evidence is incomplete or misleading, the evaluator has no recourse.
+- Decision: Allow `read` only (grep/glob/list/bash/web stay denied), restricted by prompt to files the caller explicitly names — typically the job file, to check `## Goal` and `## Progress` against the claims.
+- Consequences: The evaluator can catch a misleading evidence packet instead of rubber-stamping it, while the missing search tools keep it from drifting into code review.
+- Related: `agents/goal-evaluator.md`, `agents/auto.md`
+
+## DEC-0011 — Adversarial reviewer may run allowlisted git inspection
+- Date: 2026-07-02
+- Status: accepted
+- Context: All subagents were bash-less by convention, so the ground-truth gate had to trust the author's pasted verification output. A full shell-capable verification-runner was deferred pending a safe-command design.
+- Decision: Give `adversarial-reviewer` a pattern-scoped bash permission: `git diff/log/show/status` (plus `--no-pager` variants) allowed, everything else denied. Independently reproducing what actually changed is stronger evidence than trusting the author's summary; test suites and builds remain parent-run.
+- Consequences: The strongest gate can inspect the real diff itself with no permission prompts and no mutation surface. The broader verification-runner (running test gates in a subagent) remains open — this covers only git inspection.
+- Related: `agents/adversarial-reviewer.md`, `agents/auto.md`
+
+## DEC-0012 — Offer deterministic gotchas loading in project setup
+- Date: 2026-07-02
+- Status: accepted
+- Context: "Read `memory/gotchas.md` on session start" is an instruction the model must remember, and it does not survive compaction. OpenCode's `instructions` config field loads files deterministically.
+- Decision: `/init` offers wiring `memory/gotchas.md` into the project-level `opencode.json` `instructions` array. This config repo's root `opencode.json` is not changed — its gotchas are about this repo, not about downstream projects.
+- Consequences: Projects that opt in get pitfalls injected every session; gotchas files should stay short since they become a per-session context cost.
+- Related: `commands/init.md`, `agents/auto.md`

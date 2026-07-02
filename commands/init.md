@@ -49,7 +49,17 @@ Process:
    - `memory/decisions.md` — decision log (edit in place; commit history preserves prior versions)
    - `memory/gotchas.md` — recurring pitfalls and invariants
    - Preserve existing project docs; make `memory/README.md` map to them.
-6. Optionally: add managed `.gitignore` block for `jobs/` surfaces:
+6. Optionally: offer deterministic gotchas loading. If the project has (or wants) a project-level `opencode.json`, add `memory/gotchas.md` to its `instructions` array so recurring pitfalls are injected every session instead of relying on the agent remembering to read them:
+
+```json
+{
+  "instructions": ["memory/gotchas.md"]
+}
+```
+
+Keep `memory/gotchas.md` short if wired this way — it becomes a per-session context cost. Without this wiring, the fallback remains "read `memory/gotchas.md` on session start."
+
+7. Optionally: add managed `.gitignore` block for `jobs/` surfaces:
 
 ```gitignore
 # BEGIN opencode job surfaces
@@ -61,7 +71,7 @@ jobs/*
 # END opencode job surfaces
 ```
 
-7. Summarize what was created or updated.
+8. Summarize what was created or updated.
 
 Rules:
 - Write project-specific guidance first. Do not copy the global protocol wholesale; include only the concise job-system usage notes that help agents work in that project.
